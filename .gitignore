@@ -1,0 +1,6 @@
+context/*.md
+context/*.txt
+*.pyc
+__pycache__/
+.vscode/
+.idea/
