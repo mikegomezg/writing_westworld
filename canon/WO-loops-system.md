@@ -1,8 +1,3 @@
----
-status: canon
-created: 2024-12-27
----
-
 # Host Loops
 
 Programmed narratives that structure host existence.

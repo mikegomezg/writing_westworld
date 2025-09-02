@@ -1,7 +1,3 @@
----
-status: canon
-created: 2024-12-27
----
 
 # Consciousness
 

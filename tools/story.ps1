@@ -1,16 +1,13 @@
 param(
-    [string]$query = "",
-    [string]$types = "",
-    [string]$keywords = "",
-    [string]$storyline = "",
-    [string]$format = "markdown",
-    [switch]$list,
-    [switch]$storylines,
-    [string]$canonize = "",
-    [string]$deactivate = "",
-    [switch]$recent,
-    [int]$days = 7,
-    [switch]$generate
+    [string[]]$CH,      # Character names to search
+    [string[]]$TH,      # Themes to search
+    [string[]]$BE,      # Beats to search
+    [string[]]$WO,      # World elements to search
+    [string[]]$IN,      # Influences to search
+    [string[]]$SL,      # Storylines to search
+    [string[]]$search,  # General keyword search
+    [switch]$recent,    # Show recent working files
+    [string]$output     # Output file
 )
 
 # Ensure we're in the project root
@@ -23,98 +20,20 @@ function Test-Python {
     try {
         python --version | Out-Null
         return $true
-    } catch {
+    }
+    catch {
         Write-Host "Python not found. Please install Python 3.8+" -ForegroundColor Red
         return $false
     }
 }
 
-# List storylines
-if ($storylines) {
-    Write-Host "`nStorylines:" -ForegroundColor Cyan
-    Get-ChildItem -Path "canon\storylines" -Filter "SL-*.md" -ErrorAction SilentlyContinue | 
-        ForEach-Object {
-            Write-Host "  $($_.BaseName)" -ForegroundColor Yellow
-            $content = Get-Content $_.FullName | Select-Object -Skip 6 -First 3
-            $content | ForEach-Object { Write-Host "    $_" }
-        }
-    exit
-}
-
-# List files by type
-if ($list) {
-    if ($types) {
-        Get-ChildItem -Filter "$types-*.md" -Recurse | 
-            Select-Object Name, Directory, LastWriteTime |
-            Format-Table -AutoSize
-    } else {
-        Get-ChildItem -Filter "*.md" -Recurse | 
-            Where-Object { $_.Name -match '^(CH|WO|TH|BE|IN|SL)-' } |
-            Select-Object @{Name="Type";Expression={$_.Name.Substring(0,2)}}, Name, Directory, LastWriteTime |
-            Sort-Object Type, Name |
-            Format-Table -AutoSize
-    }
-    exit
-}
-
-# Canonize a file
-if ($canonize) {
-    if (Test-Path $canonize) {
-        $fileName = Split-Path -Leaf $canonize
-        
-        # Determine target directory
-        $targetDir = "canon"
-        if ($fileName.StartsWith("SL-")) {
-            $targetDir = "canon\storylines"
-        }
-        
-        # Ensure directory exists
-        if (!(Test-Path $targetDir)) { 
-            New-Item -ItemType Directory -Path $targetDir -Force
-        }
-        
-        # Move file
-        Move-Item $canonize "$targetDir\" -Force
-        Write-Host "Moved $canonize to $targetDir/" -ForegroundColor Green
-        
-        # Git commit
-        git add .
-        git commit -m "canon: $fileName"
-    } else {
-        Write-Host "File not found: $canonize" -ForegroundColor Red
-    }
-    exit
-}
-
-# Deactivate a file
-if ($deactivate) {
-    if (Test-Path $deactivate) {
-        if (!(Test-Path "inactive")) { 
-            New-Item -ItemType Directory -Path "inactive" 
-        }
-        $fileName = Split-Path -Leaf $deactivate
-        Move-Item $deactivate "inactive/" -Force
-        Write-Host "Moved $deactivate to inactive/" -ForegroundColor Yellow
-        git add .
-        git commit -m "inactive: $fileName"
-    } else {
-        Write-Host "File not found: $deactivate" -ForegroundColor Red
-    }
-    exit
-}
-
-# Show recent changes
+# Show recent working files
 if ($recent) {
-    Write-Host "`nRecent commits (last $days days):" -ForegroundColor Cyan
-    git log --oneline --since="$days days ago" | Select-Object -First 10
-    
-    Write-Host "`nRecently modified files:" -ForegroundColor Cyan
-    Get-ChildItem -Filter "*.md" -Recurse | 
-        Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-$days) } |
-        Select-Object Name, Directory, LastWriteTime |
-        Sort-Object LastWriteTime -Descending |
-        Select-Object -First 10 |
-        Format-Table -AutoSize
+    Write-Host "`nRecent working files:" -ForegroundColor Cyan
+    Get-ChildItem -Path "." -Filter "*.md" | 
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 10 |
+    Format-Table Name, LastWriteTime -AutoSize
     exit
 }
 
@@ -127,14 +46,21 @@ if (Test-Python) {
     
     # Build Python command
     $timestamp = Get-Date -Format "yyyy-MM-dd-HHmm"
-    $outputFile = "context\context-$timestamp.md"
+    $outputFile = if ($output) { $output } else { "context\context-$timestamp.md" }
     
     $pythonArgs = @()
-    if ($query) { $pythonArgs += "-q", "`"$query`"" }
-    if ($types) { $pythonArgs += "-t", $types }
-    if ($keywords) { $pythonArgs += "-k", "`"$keywords`"" }
-    if ($storyline) { $pythonArgs += "-s", $storyline }
-    $pythonArgs += "-f", $format
+    
+    # Add type-specific searches
+    if ($CH) { $pythonArgs += "-t", "CH", "-k", ($CH -join ",") }
+    if ($TH) { $pythonArgs += "-t", "TH", "-k", ($TH -join ",") }
+    if ($BE) { $pythonArgs += "-t", "BE", "-k", ($BE -join ",") }
+    if ($WO) { $pythonArgs += "-t", "WO", "-k", ($WO -join ",") }
+    if ($IN) { $pythonArgs += "-t", "IN", "-k", ($IN -join ",") }
+    if ($SL) { $pythonArgs += "-t", "SL", "-k", ($SL -join ",") }
+    
+    # Or general search
+    if ($search) { $pythonArgs += "-k", ($search -join ",") }
+    
     $pythonArgs += "-o", $outputFile
     
     # Run retriever
@@ -146,16 +72,11 @@ if (Test-Python) {
     if (Test-Path $outputFile) {
         Write-Host "`nContext saved to: $outputFile" -ForegroundColor Green
         
-        if ($generate) {
-            Write-Host "`nContext retrieved. Copied to clipboard for AI tool." -ForegroundColor Yellow
-            Get-Content $outputFile | Set-Clipboard
-            Write-Host "Ready to paste into AI!" -ForegroundColor Green
-        } else {
-            # Show preview
-            Get-Content $outputFile | Select-Object -First 30
-            Write-Host "`n... (preview - full context in $outputFile)" -ForegroundColor Gray
-        }
+        # Show preview
+        Get-Content $outputFile | Select-Object -First 30
+        Write-Host "`n... (preview - full context in $outputFile)" -ForegroundColor Gray
     }
-} else {
+}
+else {
     Write-Host "Please install Python to use context retrieval" -ForegroundColor Red
 }

@@ -1,9 +1,3 @@
----
-status: working
-storyline: dolores-journey
-references: [CH-dolores-core, TH-consciousness-emergence]
-created: 2024-12-27
----
 
 # The Fly
 
