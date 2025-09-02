@@ -15,15 +15,12 @@ Format: `[CODE]-[identifier]-[descriptor].md`
 
 ## Markdown Formatting
 
-All markdown files should follow this format with proper spacing around headers:
+All markdown files should follow this format with proper spacing:
 
 ```markdown
----
-status: canon
-created: 2024-12-27
----
-
 # Main Title
+
+First paragraph with no metadata or frontmatter.
 
 ## Section Header
 
@@ -35,9 +32,10 @@ More content with blank lines around headers.
 ```
 
 **Key formatting rules:**
-- One blank line before and after all headers (`#`, `##`, `###`)
-- One blank line between sections
-- Consistent spacing throughout all files
+- NO frontmatter (no --- sections)
+- Start directly with # Title
+- One blank line before and after all headers
+- Consistent spacing throughout
 
 ## Workflow
 

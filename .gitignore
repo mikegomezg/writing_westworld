@@ -1,5 +1,5 @@
-context/*.md
-context/*.txt
+context/
+*.tmp
 *.pyc
 __pycache__/
 .vscode/

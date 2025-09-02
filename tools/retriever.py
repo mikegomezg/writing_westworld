@@ -122,7 +122,10 @@ class StoryRetriever:
             output.append("## Canon Files\n")
             for file in canon_files:
                 # Show relative path from canon/
-                rel_path = file.relative_to(self.canon_dir) if self.canon_dir in file.parents else file.name
+                try:
+                    rel_path = file.relative_to(self.canon_dir)
+                except ValueError:
+                    rel_path = file.name
                 output.append(f"### {rel_path}\n")
                 output.append(self.extract_excerpt(file))
                 output.append("\n")
