@@ -8,6 +8,7 @@ created: 2024-12-27
 The revelation of artificial identity and purpose.
 
 ## Major Beats
+
 - Investigating anomalies
 - Relationship with Theresa
 - Ford's control revealed

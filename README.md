@@ -13,6 +13,32 @@ A Git-based writing system using storylines, beats, and influences.
 
 Format: `[CODE]-[identifier]-[descriptor].md`
 
+## Markdown Formatting
+
+All markdown files should follow this format with proper spacing around headers:
+
+```markdown
+---
+status: canon
+created: 2024-12-27
+---
+
+# Main Title
+
+## Section Header
+
+Content here with proper spacing.
+
+## Another Section
+
+More content with blank lines around headers.
+```
+
+**Key formatting rules:**
+- One blank line before and after all headers (`#`, `##`, `###`)
+- One blank line between sections
+- Consistent spacing throughout all files
+
 ## Workflow
 
 1. Files in root = working/active development
