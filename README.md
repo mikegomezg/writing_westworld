@@ -48,13 +48,45 @@ More content with blank lines around headers.
 
 ## Usage
 
+### Search for Context
+
 ```powershell
-# Retrieve context
-.\tools\story.ps1 -query "Dolores consciousness" -types CH,TH,BE
+# Search by character
+.\tools\story.ps1 -CH dolores
 
-# List storylines
-.\tools\story.ps1 -storylines
+# Search by theme
+.\tools\story.ps1 -TH consciousness
 
-# Move to canon
-.\tools\story.ps1 -canonize BE-maze-revelation.md
+# Search by beat
+.\tools\story.ps1 -BE awakening
+
+# Combined search (searches all specified types)
+.\tools\story.ps1 -CH dolores bernard -TH consciousness -BE fly
+
+# General keyword search
+.\tools\story.ps1 -search "maze journey"
+
+# Show recent files in root
+.\tools\story.ps1 -recent
+```
+
+### Suggest Filename
+
+```powershell
+# Analyze a file and suggest appropriate names
+.\tools\name.ps1 draft.md
+
+# Output examples:
+# BE-dolores-awakening.md
+# CH-dolores-expanded.md
+```
+
+### Manual Organization
+
+```powershell
+# Move good content to canon
+mv BE-fly-death.md canon\
+
+# Move to inactive (no longer needed)
+mv old-draft.md inactive\
 ```

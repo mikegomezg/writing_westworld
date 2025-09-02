@@ -24,8 +24,10 @@ class StoryRetriever:
         2. Search canon/ (established)
         3. Filter by type prefix if specified
         4. Match keywords in filename or content
+        5. Deduplicate results
         """
         results = []
+        seen_files = set()  # Track files we've already added
 
         # Search root first (working files)
         for file in self.root.glob('*.md'):
@@ -43,11 +45,15 @@ class StoryRetriever:
                     content = file.read_text(encoding='utf-8').lower()
                     filename = file.name.lower()
                     if any(kw.lower() in filename or kw.lower() in content for kw in keywords):
-                        results.append(file)
+                        if file not in seen_files:
+                            results.append(file)
+                            seen_files.add(file)
                 except:
                     pass
             else:
-                results.append(file)
+                if file not in seen_files:
+                    results.append(file)
+                    seen_files.add(file)
 
         # Then search canon/ recursively
         if self.canon_dir.exists():
@@ -62,11 +68,15 @@ class StoryRetriever:
                         content = file.read_text(encoding='utf-8').lower()
                         filename = file.name.lower()
                         if any(kw.lower() in filename or kw.lower() in content for kw in keywords):
-                            results.append(file)
+                            if file not in seen_files:
+                                results.append(file)
+                                seen_files.add(file)
                     except:
                         pass
                 else:
-                    results.append(file)
+                    if file not in seen_files:
+                        results.append(file)
+                        seen_files.add(file)
 
         return results
 

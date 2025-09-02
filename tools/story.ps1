@@ -35,54 +35,80 @@ if (!(Test-Path "context")) {
     New-Item -ItemType Directory -Path "context" | Out-Null
 }
 
-# Build arguments
+# Build combined search - accumulate all searches
+$allTypes = @()
+$allKeywords = @()
+
+# Collect all specified searches
+if ($CH) { 
+    $allTypes += "CH"
+    $allKeywords += $CH
+}
+if ($TH) { 
+    $allTypes += "TH"
+    $allKeywords += $TH
+}
+if ($BE) { 
+    $allTypes += "BE"
+    $allKeywords += $BE
+}
+if ($WO) { 
+    $allTypes += "WO"
+    $allKeywords += $WO
+}
+if ($IN) { 
+    $allTypes += "IN"
+    $allKeywords += $IN
+}
+if ($SL) { 
+    $allTypes += "SL"
+    $allKeywords += $SL
+}
+
+# Add general search keywords
+if ($search) {
+    $allKeywords += $search
+}
+
+# Build command
 $cmd = "python tools\retriever.py"
 
-# Handle different search types
-if ($CH -or $TH -or $BE -or $WO -or $IN -or $SL) {
-    # Type-specific searches
-    $types = @()
-    $keywords = @()
+# Add parameters if we have any searches
+if ($allTypes.Count -gt 0 -or $allKeywords.Count -gt 0) {
+    if ($allTypes.Count -gt 0) {
+        $cmd += " -t `"$($allTypes -join ',')`""
+    }
+    if ($allKeywords.Count -gt 0) {
+        $cmd += " -k `"$($allKeywords -join ',')`""
+    }
+    $cmd += " -o `"$outputFile`""
     
-    if ($CH) { $types += "CH"; $keywords += $CH }
-    if ($TH) { $types += "TH"; $keywords += $TH }
-    if ($BE) { $types += "BE"; $keywords += $BE }
-    if ($WO) { $types += "WO"; $keywords += $WO }
-    if ($IN) { $types += "IN"; $keywords += $IN }
-    if ($SL) { $types += "SL"; $keywords += $SL }
+    # Run retriever
+    Write-Host "Searching..." -ForegroundColor Cyan
+    Invoke-Expression $cmd
     
-    if ($types) { $cmd += " -t " + ($types -join ",") }
-    if ($keywords) { $cmd += " -k " + ($keywords -join ",") }
-}
-elseif ($search) {
-    # General search
-    $cmd += " -k " + ($search -join ",")
+    # Display result
+    if (Test-Path $outputFile) {
+        Write-Host "`nContext saved to: $outputFile" -ForegroundColor Green
+        
+        # Show preview
+        $content = Get-Content $outputFile -Raw
+        $lines = $content -split "`n" | Select-Object -First 30
+        $lines -join "`n"
+        
+        if (($content -split "`n").Count -gt 30) {
+            Write-Host "`n... (full context in $outputFile)" -ForegroundColor Gray
+        }
+    }
 }
 else {
     Write-Host "Please specify what to search for:" -ForegroundColor Yellow
-    Write-Host "  -CH dolores         # Search for character"
-    Write-Host "  -TH consciousness   # Search for theme"
-    Write-Host "  -search 'maze'      # General search"
-    Write-Host "  -recent             # Show recent files"
-    exit
-}
-
-$cmd += " -o `"$outputFile`""
-
-# Run retriever
-Write-Host "Searching..." -ForegroundColor Cyan
-Invoke-Expression $cmd
-
-# Display result
-if (Test-Path $outputFile) {
-    Write-Host "`nContext saved to: $outputFile" -ForegroundColor Green
-    
-    # Show preview
-    $content = Get-Content $outputFile -Raw
-    $lines = $content -split "`n" | Select-Object -First 30
-    $lines -join "`n"
-    
-    if (($content -split "`n").Count -gt 30) {
-        Write-Host "`n... (full context in $outputFile)" -ForegroundColor Gray
-    }
+    Write-Host "  -CH dolores bernard    # Search for characters"
+    Write-Host "  -TH consciousness      # Search for themes"
+    Write-Host "  -BE awakening          # Search for beats"
+    Write-Host "  -search 'maze'         # General search"
+    Write-Host "  -recent                # Show recent files"
+    Write-Host ""
+    Write-Host "You can combine searches:" -ForegroundColor Cyan
+    Write-Host "  .\tools\story.ps1 -CH dolores -TH consciousness -BE fly"
 }
