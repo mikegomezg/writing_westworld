@@ -1,35 +1,18 @@
-# Theme Title
+# Theme Name
 
 ## Core Concept
 
-[The central idea or question this theme explores]
+What fundamental question or idea this theme explores in the story.
 
-## Philosophical Foundation
+## How It Manifests
 
-- **Source**: [What philosophy/theory this draws from]
-- **Key Questions**: [What questions does this raise]
-- **Implications**: [What this means for the story]
+The theme appears through specific character actions, dialogue, and story events. It's woven into the narrative rather than stated directly.
 
-## Story Applications
+## Character Connections
 
-- **Character Impact**: [How this affects characters]
-- **Plot Integration**: [How this drives story events]
-- **World Building**: [How this shapes the world]
+- **Character Name**: How they embody or struggle with this theme
+- **Another Character**: Their relationship to this concept
 
-## Westworld Connections
+## Story Moments
 
-- **Consciousness**: [How this relates to awakening]
-- **Reality**: [What reality questions this raises]
-- **Free Will**: [Questions of choice and determinism]
-
-## Examples in Story
-
-- **Specific Moments**: [Where this theme appears]
-- **Character Arcs**: [Who embodies this theme]
-- **Visual/Symbolic**: [How this is represented]
-
-## External Influences
-
-- **Philosophy**: [Relevant thinkers/theories]
-- **Literature**: [Similar themes in other works]
-- **Science**: [Scientific concepts that support this]
+Specific beats where this theme is most apparent.

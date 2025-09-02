@@ -1,35 +1,17 @@
-# Influence Title
+# Influence Name
 
 ## Source
 
-- **Author/Thinker**: [Who created this idea]
-- **Work**: [What book/essay/art this comes from]
-- **Date**: [When it was created]
+Where this idea comes from (philosopher, book, theory, etc.)
 
-## Core Ideas
+## Core Idea
 
-[The key concepts from this influence]
+The essential concept in simple terms.
 
-## How It Applies
+## Application to Story
 
-- **Direct Application**: [How this directly influences the story]
-- **Thematic Connection**: [What themes this supports]
-- **Character Development**: [How this shapes characters]
-
-## Westworld Integration
-
-- **Consciousness Theory**: [How this relates to awakening]
-- **Reality Questions**: [What reality concepts this explores]
-- **Narrative Structure**: [How this shapes storytelling]
+How this influence shapes the narrative, characters, or world.
 
 ## Specific Examples
 
-- **Story Moments**: [Where this influence appears]
-- **Character Quotes**: [What characters might say]
-- **Visual Elements**: [How this is represented]
-
-## Further Reading
-
-- **Original Source**: [Where to find the original]
-- **Related Works**: [Other works that explore similar ideas]
-- **Critical Analysis**: [How others have interpreted this]
+Where this shows up in dialogue, events, or character development.

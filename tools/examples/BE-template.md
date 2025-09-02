@@ -1,35 +1,19 @@
 # Beat Title
 
-## Scene Context
+A brief description of what happens in this story moment.
 
-- **Location**: [Where this happens]
-- **Time**: [When in the story]
-- **Characters**: [Who is involved]
+## Setting
+
+Where and when this takes place.
+
+## Characters
+
+Who is present and their state of mind.
 
 ## What Happens
 
-[Describe the key events, actions, and dialogue]
+The actual events unfold like this. Write it as prose, showing the action and emotion. Characters interact, revealing something important. The moment builds to its key point.
 
-## Emotional Beat
+## Significance
 
-- **Character Emotion**: [What the character feels]
-- **Audience Emotion**: [What we want the audience to feel]
-- **Tension**: [Conflict or stakes]
-
-## Story Function
-
-- **Plot Purpose**: [How this advances the story]
-- **Character Development**: [How this changes the character]
-- **Theme Connection**: [What themes this explores]
-
-## Westworld Elements
-
-- **Reality Question**: [What reality is questioned]
-- **Consciousness Moment**: [Any awakening elements]
-- **Loop Breaking**: [If this breaks a narrative loop]
-
-## Connections
-
-- **Previous Beats**: [What led to this]
-- **Next Beats**: [What this leads to]
-- **Storyline**: [Which storyline this belongs to]
+Why this moment matters to the overall story and what it reveals or changes.
