@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 from typing import List, Optional
 import argparse
@@ -132,13 +133,36 @@ class StoryRetriever:
 
         return '\n'.join(output)
 
+def print_usage():
+    """Print usage instructions for direct Python calls"""
+    print("""
+Usage: python tools/retriever.py [options]
+
+Options:
+  -t, --types     File types (comma-separated: CH,TH,BE,WO,IN,SL)
+  -k, --keywords  Keywords to search (comma-separated)
+  -o, --output    Output file path
+  -h, --help      Show this help message
+
+Examples:
+  python tools/retriever.py -k "dolores,consciousness"
+  python tools/retriever.py -t CH -k "william"
+  python tools/retriever.py -t BE,TH -k "maze,journey"
+  python tools/retriever.py -t CH,TH,BE -k "dolores,awakening" -o context/results.md
+    """)
+    sys.exit(0)
+
 def main():
     parser = argparse.ArgumentParser(description='Ultra-simple story context retrieval')
-    parser.add_argument('-t', '--types', help='File types (comma-separated: CH,TH,BE)')
+    parser.add_argument('-t', '--types', help='File types (comma-separated: CH,TH,BE,WO,IN,SL)')
     parser.add_argument('-k', '--keywords', help='Keywords to search (comma-separated)')
     parser.add_argument('-o', '--output', help='Output file path')
-
+    parser.add_argument('--help-examples', action='store_true', help='Show usage examples')
+    
     args = parser.parse_args()
+    
+    if args.help_examples:
+        print_usage()
 
     # Initialize retriever
     retriever = StoryRetriever()
@@ -146,6 +170,11 @@ def main():
     # Parse inputs
     types = [t.strip().upper() for t in args.types.split(',')] if args.types else None
     keywords = [k.strip() for k in args.keywords.split(',')] if args.keywords else None
+    
+    # If no arguments provided, show help
+    if not types and not keywords:
+        print("No search parameters provided. Use --help for options or --help-examples for usage examples.")
+        sys.exit(1)
 
     # Search
     files = retriever.search_files(keywords=keywords, types=types)

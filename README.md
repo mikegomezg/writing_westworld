@@ -46,26 +46,49 @@ More content with blank lines around headers.
 
 ## Usage
 
-### Search for Context
+### For AI Agents (Python Direct)
+
+```bash
+# Direct retriever call
+python tools/retriever.py -t CH -k dolores
+python tools/retriever.py -t CH,TH -k dolores,consciousness
+
+# Simplified search
+python tools/search.py ch:dolores th:consciousness
+python tools/search.py keywords:maze,journey
+
+# Save results to file
+python tools/retriever.py -t BE -k awakening -o context/search-results.md
+```
+
+### For Humans (PowerShell)
 
 ```powershell
-# Search by character
-.\tools\story.ps1 -CH dolores
+# If you have PowerShell
+.\tools\story.ps1 -CH dolores -TH consciousness
+```
 
-# Search by theme
-.\tools\story.ps1 -TH consciousness
+### Common Searches
 
-# Search by beat
-.\tools\story.ps1 -BE awakening
+```bash
+# Find character information
+python tools/retriever.py -t CH -k "character_name"
 
-# Combined search (searches all specified types)
-.\tools\story.ps1 -CH dolores bernard -TH consciousness -BE fly
+# Search themes
+python tools/retriever.py -t TH -k "consciousness,reality"
 
-# General keyword search
-.\tools\story.ps1 -search "maze journey"
+# Find beats about specific moments
+python tools/retriever.py -t BE -k "awakening,memory"
 
-# Show recent files in root
-.\tools\story.ps1 -recent
+# General keyword search (all file types)
+python tools/retriever.py -k "toltek,anomaly"
+
+# Combined type and keyword search
+python tools/retriever.py -t CH,BE -k "dolores,fly"
+
+# Show help and examples
+python tools/retriever.py --help-examples
+python tools/search.py --help
 ```
 
 ### Suggest Filename
