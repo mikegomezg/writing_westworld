@@ -1,5 +1,26 @@
 # AI Generation Prompts for Ultra-Simple System
 
+## CRITICAL: Workflow for AI Agents
+
+**BEFORE CREATING ANY CONTENT:**
+
+1. **Retrieve Context Using Python**
+```bash
+# NEVER use PowerShell/.ps1 files
+# ALWAYS use Python directly:
+python tools/retriever.py -t [TYPE] -k [keywords]
+```
+
+2. **Read Retrieved Content**
+- Review what exists in canon
+- Note established facts
+- Identify connections
+
+3. **Create Building on Context**
+- Reference found content
+- Maintain consistency
+- Fill gaps without contradicting
+
 ## Core Instructions for AI
 
 ```

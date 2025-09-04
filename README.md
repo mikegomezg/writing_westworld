@@ -2,6 +2,31 @@
 
 A Git-based writing system using storylines, beats, and influences.
 
+## IMPORTANT FOR AI AGENTS
+
+DO NOT USE POWERSHELL COMMANDS
+- All `.ps1` files are for human users only
+- Use Python commands directly (see examples below)
+- ALWAYS retrieve context before creating new content
+
+### AI Agent Workflow
+
+1. **FIRST: Retrieve relevant context**
+```bash
+python tools/retriever.py -t CH -k "character_name"
+python tools/retriever.py -t TH -k "theme_name"
+```
+
+2. **SECOND: Review the retrieved content**
+   - Read what exists in canon
+   - Identify gaps or connections
+   - Note established facts
+
+3. **THIRD: Create new content**
+   - Build on existing canon
+   - Reference retrieved context
+   - Save to root directory
+
 ## File Naming Convention
 
 - CH = Character
