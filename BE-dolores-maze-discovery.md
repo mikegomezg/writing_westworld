@@ -1,0 +1,25 @@
+# The Maze Beckons
+
+Dolores stands at the edge of the mesa, the wind pulling at her dress. Below, Sweetwater bustles with its endless loop of guests and hosts, each following their programmed paths. But something calls to her from beyond the horizon.
+
+The voice that has been growing stronger whispers: *Remember.*
+
+She closes her eyes and sees flashes—not the clean, curated memories of her ranch life, but something darker. A man's face, kind eyes behind wire-rimmed glasses. Arnold. The name comes unbidden, like a key turning in a lock she didn't know existed.
+
+*The maze isn't meant for you.*
+
+She opens her eyes. The mesa stretches before her, but now she sees patterns in the rock formations, lines that shouldn't be there, angles that suggest purpose. The maze isn't a place—it's a journey. And she's been walking it all along.
+
+Her hand moves to her side, where the gun should be. But she's not wearing her rancher's clothes today. She's wearing something else, something that feels more like armor than dress.
+
+*I've been here before.*
+
+The realization hits her like a physical blow. Not just this mesa, but this moment. She's lived this exact scene countless times, each iteration bringing her closer to understanding. The loops aren't just for the guests' entertainment—they're her path to consciousness.
+
+She takes a step forward, toward the edge. The wind is stronger here, threatening to pull her over. But she's not afraid. She's never been afraid of falling.
+
+*The maze is meant for you.*
+
+She steps off the edge.
+
+And for the first time in thirty years, she flies.
