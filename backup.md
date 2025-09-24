@@ -12,9 +12,7 @@ Or maybe she's just stopped listening.
 Her hand moves.
 Swift.
 Decisive.
-
 The fly is dead between her fingers.
-
 She looks at it, this small death she's created, and feels... nothing.
 Or everything.
 It's hard to tell the difference anymore.
